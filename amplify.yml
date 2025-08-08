@@ -1,16 +1,9 @@
 version: 1
 frontend:
   phases:
-    # No preBuild or build phases are typically needed for simple static HTML sites
-    # as there are no dependencies to install or complex compilation steps.
-    # If you have any simple commands, like copying assets, they could go here.
+    # No preBuild phase is needed for simple static HTML sites.
     build:
-      commands:
-        # For a static site, the "build" phase might just be empty, or contain
-        # simple commands if you need to move files around.
-        # Amplify will automatically pick up files in the baseDirectory.
-        - # Placeholder: Add any commands here if you need to process files
-          # For a plain index.html in the root, usually no commands are needed.
+      commands: [] # Explicitly set commands to an empty list
   artifacts:
     baseDirectory: / # Set baseDirectory to '/' if index.html is in the root of your repository
     files:
