@@ -9,6 +9,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* New CSS to scale down the entire UI */
+        html {
+            font-size: 67%;
+            /* Scales 1rem to 67% of browser's default 16px (approx 10.72px) */
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f0f2f5;
@@ -41,6 +47,46 @@
 
         .dropdown-menu.active {
             display: block;
+        }
+
+        /* Modal specific styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 768px;
+            /* Based on the screenshot's width */
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -356,7 +402,7 @@
                 <button
                     class="px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors text-sm">Test
                     Covenant (UP)</button>
-                <button
+                <button id="validateCovenantBtn"
                     class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm">Validate
                     Covenant</button>
             </div>
@@ -716,6 +762,70 @@
         </button>
     </footer>
 
+    <!-- Validate Covenant Modal -->
+    <div id="validateCovenantModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center pb-4 border-b border-gray-200 mb-4">
+                <h3 class="text-xl font-semibold text-gray-800">Test Covenant (LP)</h3>
+                <button class="text-gray-400 hover:text-gray-600" onclick="closeModal()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <div class="space-y-4 text-sm">
+                <p>
+                    <span class="font-medium text-gray-700">Agent Name:</span> Trust Formula Extraction and Calculations
+                </p>
+                <p>
+                    <span class="font-medium text-gray-700">Covenant Threshold:</span> 1.2
+                </p>
+                <p>
+                    <span class="font-medium text-gray-700">Test Outcome:</span> 1.61
+                </p>
+                <p>
+                    <span class="font-medium text-gray-700">Compliance Result:</span> <span
+                        class="text-green-600 font-semibold">PASS</span>
+                </p>
+                <div>
+                    <p class="font-medium text-gray-700 mb-1">Justification:</p>
+                    <p class="text-gray-800 bg-gray-50 p-3 rounded-md leading-relaxed">
+                        The Debt Service Coverage Ratio of 1.61 was calculated by first determining EBITDA (325000) by
+                        adding net income (296250), interest expense (8000), taxes (77070), depreciation (50000), and
+                        amortization (5000), then subtracting dividends (0), distributions (30000), and owner
+                        advances/withdrawals (15000). This was then divided by the total debt service of 180000
+                        (interest expense 8000 + principal repayment 172000). The resulting ratio of 1.61 exceeds the
+                        minimum threshold of 1.2, indicating PASS compliance.
+                    </p>
+                </div>
+                <div>
+                    <p class="font-medium text-gray-700 mb-1">Formula Expression:</p>
+                    <p class="text-gray-800 bg-gray-50 p-3 rounded-md text-xs leading-relaxed font-mono">
+                        (net_income + interest_expense + taxes + depreciation + amortization - dividends - distribution
+                        - owner_advances_withdrawals) / (interest_expense + principal_repayment)
+                    </p>
+                </div>
+                <div>
+                    <p class="font-medium text-gray-700 mb-1">Parameters:</p>
+                    <p class="text-gray-800 bg-gray-50 p-3 rounded-md text-xs leading-relaxed font-mono">
+                        "{'principal_repayment': '172000', 'owner_advances_withdrawals': '15000', 'distribution':
+                        '30000', 'dividends': '0', 'amortization': '5000', 'depreciation': '50000', 'taxes': '77070',
+                        'interest_expense': '8000', 'net_income':'296250'}"
+                    </p>
+                </div>
+            </div>
+            <div class="flex justify-end space-x-3 mt-6 pt-4 border-t border-gray-200">
+                <button
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors text-sm">Previous</button>
+                <button
+                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm">Next</button>
+            </div>
+        </div>
+    </div>
+
+
     <script>
         // JavaScript for dropdown functionality
         document.addEventListener('DOMContentLoaded', () => {
@@ -817,6 +927,26 @@
                         }
                     });
                 });
+            });
+
+            // Modal functionality
+            const validateCovenantBtn = document.getElementById('validateCovenantBtn');
+            const validateCovenantModal = document.getElementById('validateCovenantModal');
+
+            validateCovenantBtn.addEventListener('click', () => {
+                validateCovenantModal.classList.add('active');
+            });
+
+            // Function to close the modal
+            window.closeModal = function () {
+                validateCovenantModal.classList.remove('active');
+            };
+
+            // Close modal when clicking outside of it
+            validateCovenantModal.addEventListener('click', (event) => {
+                if (event.target === validateCovenantModal) {
+                    closeModal();
+                }
             });
         });
     </script>
