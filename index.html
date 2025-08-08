@@ -9,16 +9,24 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* New CSS to scale down the entire UI */
+        /* Adjust root font-size for consistent scaling across the UI */
         html {
-            font-size: 67%;
-            /* Scales 1rem to 67% of browser's default 16px (approx 10.72px) */
+            font-size: 67.5%;
+            /* This scales 1rem to 67.5% of the browser's default font-size (usually 16px) */
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f0f2f5;
             /* Light gray background */
+            display: flex;
+            /* Ensure body is a flex container */
+            flex-direction: column;
+            /* Stack children vertically */
+            height: 100vh;
+            /* Make body fill the viewport height */
+            overflow: hidden;
+            /* Hide body scrollbars if content attempts to overflow */
         }
 
         /* Custom scrollbar for demonstration if content overflows */
@@ -165,10 +173,10 @@
             </div>
         </div>
 
-        <!-- Second Lane: BankingGPT Heading and Main Navigation Dropdowns -->
+        <!-- Second Lane: nCino LOS Heading and Main Navigation Dropdowns -->
         <nav
             class="py-2 px-4 flex items-center space-x-6 text-gray-700 font-medium text-sm overflow-x-auto whitespace-nowrap">
-            <!-- BankingGPT heading moved here -->
+            <!-- nCino LOS heading moved here -->
             <div class="text-blue-600 font-bold text-lg flex items-center mr-6 flex-shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -622,48 +630,20 @@
                         <div class="col-span-1 md:col-span-2 flex flex-col">
                             <span class="text-gray-600 mb-1">Calculation Logic</span>
                             <div
-                                class="editable-field-container flex items-center justify-between bg-gray-50 p-3 rounded-md text-xs leading-relaxed">
-                                <span class="display-value text-gray-800 font-medium flex-1"
-                                    data-field-name="Calculation Logic">Definition of **EBITDA** (How to Calculate) =
-                                    Net Income + Interest Expense + Taxes + Depreciation + Amortization - Dividends -
-                                    Distribution - Owner Advances/Withdrawals</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors ml-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
-                                        </path>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-span-1 md:col-span-2 flex flex-col">
-                            <span class="text-gray-600 mb-1">Definition of **Debt Service** (How to Calculate) =
-                                Interest Expense + Principal Repayment</span>
-                            <div
-                                class="editable-field-container flex items-center justify-between bg-gray-50 p-3 rounded-md text-xs leading-relaxed">
-                                <span class="display-value text-gray-800 font-medium flex-1"
-                                    data-field-name="Definition of Debt Service">Definition of **Debt Service** (How to
-                                    Calculate) = Interest Expense + Principal Repayment</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors ml-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
-                                        </path>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-span-1 md:col-span-2 flex flex-col">
-                            <span class="text-gray-600 mb-1">Definition of **DSC** (How to Calculated) = EBITDA/Debt
-                                Service</span>
-                            <div
-                                class="editable-field-container flex items-center justify-between bg-gray-50 p-3 rounded-md text-xs leading-relaxed">
-                                <span class="display-value text-gray-800 font-medium flex-1"
-                                    data-field-name="Definition of DSC">Definition of **DSC** (How to Calculated) =
-                                    EBITDA/Debt Service</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors ml-2">
+                                class="editable-field-container relative bg-gray-50 p-3 rounded-md text-xs leading-relaxed">
+                                <span class="display-value text-gray-800 font-medium pr-6"
+                                    data-field-name="Calculation Logic">
+                                    Definition of **EBITDA** (How to Calculate) = Net Income + Interest Expense + Taxes
+                                    + Depreciation + Amortization - Dividends - Distribution - Owner
+                                    Advances/Withdrawals
+                                    <br><br>
+                                    Definition of **Debt Service** (How to Calculate) = Interest Expense + Principal
+                                    Repayment
+                                    <br><br>
+                                    Definition of **DSC** (How to Calculated) = EBITDA/Debt Service
+                                </span>
+                                <button
+                                    class="edit-button text-gray-400 hover:text-blue-600 transition-colors absolute top-1 right-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -865,7 +845,7 @@
                     const fieldName = displayValueSpan.dataset.fieldName;
 
                     // Determine if it's a short text (input) or long text (textarea)
-                    const isLongText = ['Calculation Logic', 'Definition of Debt Service', 'Definition of DSC'].includes(fieldName);
+                    const isLongText = (fieldName === 'Calculation Logic'); // Only Calculation Logic is long text now
 
                     // Create the input/textarea element
                     let inputElement;
@@ -878,8 +858,8 @@
                         inputElement.type = 'text';
                         inputElement.classList.add('w-full', 'p-1', 'border', 'border-blue-400', 'rounded-md', 'shadow-sm', 'focus:outline-none', 'focus:ring-2', 'focus:ring-blue-500', 'text-sm');
                     }
-                    // Remove strong tags for editing, but keep the text content
-                    inputElement.value = originalValue.replace(/<\/?strong>/g, '');
+                    // Remove strong tags and <br> for editing, but keep the text content
+                    inputElement.value = originalValue.replace(/<\/?strong>/g, '').replace(/<br\s*\/?>/g, '\n').trim();
 
                     // Hide the display value and edit button
                     displayValueSpan.style.display = 'none';
@@ -900,9 +880,13 @@
 
                         let newValue = inputElement.value;
 
-                        // Re-add bolding for specific keywords in long text fields
-                        if (isLongText) {
-                            newValue = newValue.replace(/Definition of (EBITDA|Debt Service|DSC)/g, 'Definition of **$1**');
+                        // Re-add bolding and <br> for specific keywords in the combined Calculation Logic field
+                        if (fieldName === 'Calculation Logic') {
+                            // Split by newlines, re-add bolding, then join with <br><br>
+                            const lines = newValue.split('\n').map(line => {
+                                return line.replace(/Definition of (EBITDA|Debt Service|DSC)/g, 'Definition of **$1**');
+                            });
+                            newValue = lines.join('<br><br>');
                         }
 
                         displayValueSpan.innerHTML = newValue; // Update the display span
