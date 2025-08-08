@@ -9,16 +9,24 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* New CSS to scale down the entire UI */
+        /* Adjust root font-size for consistent scaling across the UI */
         html {
-            font-size: 67%;
-            /* Scales 1rem to 67% of browser's default 16px (approx 10.72px) */
+            font-size: 67.5%;
+            /* This scales 1rem to 67.5% of the browser's default font-size (usually 16px) */
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f0f2f5;
             /* Light gray background */
+            display: flex;
+            /* Ensure body is a flex container */
+            flex-direction: column;
+            /* Stack children vertically */
+            height: 100vh;
+            /* Make body fill the viewport height */
+            overflow: hidden;
+            /* Hide body scrollbars if content attempts to overflow */
         }
 
         /* Custom scrollbar for demonstration if content overflows */
@@ -165,10 +173,10 @@
             </div>
         </div>
 
-        <!-- Second Lane: BankingGPT Heading and Main Navigation Dropdowns -->
+        <!-- Second Lane: nCino LOS Heading and Main Navigation Dropdowns -->
         <nav
             class="py-2 px-4 flex items-center space-x-6 text-gray-700 font-medium text-sm overflow-x-auto whitespace-nowrap">
-            <!-- BankingGPT heading moved here -->
+            <!-- nCino LOS heading moved here -->
             <div class="text-blue-600 font-bold text-lg flex items-center mr-6 flex-shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
