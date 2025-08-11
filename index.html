@@ -997,6 +997,7 @@
             const complianceResult = document.getElementById('complianceResult');
             const justificationText = document.getElementById('justificationText');
             const mainPageCalculationLogic = document.querySelector('[data-field-name="Calculation Logic"]');
+            const mainPageLastEvaluationDate = document.querySelector('[data-field-name="Last Evaluation Date"]'); // Get the element for Last Evaluation Date
             const modalCalculationLogic = document.querySelector('[data-field-name="Calculation Logic Modal"]');
             const modalFormulaExpression = document.querySelector('[data-field-name="Formula Expression"]');
             const modalParameters = document.querySelector('[data-field-name="Parameters"]');
@@ -1051,6 +1052,7 @@
 
             // Function to reset all modal content to its initial state (as when opened from main page)
             function resetModalToInitialOpenState() {
+                // Reset the static display values in the modal to their original state
                 testOutcomeValue.textContent = initialModalDisplayValues.testOutcome;
                 complianceResult.textContent = initialModalDisplayValues.complianceResult;
                 complianceResult.classList.remove('text-red-600');
@@ -1063,8 +1065,8 @@
                     modalEditedValuesBeforeValidation.calculationLogic = mainPageCalculationLogic.innerHTML; // Also update the 'text-b' store
                 }
                 // For formula and parameters, they have static initial values in the HTML
-                modalFormulaExpression.innerHTML = `(net_income + interest_expense + taxes + depreciation + amortization - dividends - distribution - owner_advances_withdrawals) / (interest_expense + principal_repayment)`; // Explicitly set to single line if not multi-line
-                modalParameters.innerHTML = `"{'principal_repayment': '172000', 'owner_advances_withdrawals': '15000', 'distribution': '30000', 'dividends': '0', 'amortization': '5000', 'depreciation': '50000', 'taxes': '77070', 'interest_expense': '8000', 'net_income':'296250'}"`; // Explicitly set to single line if not multi-line
+                modalFormulaExpression.innerHTML = `(net_income + interest_expense + taxes + depreciation + amortization - dividends - distribution - owner_advances_withdrawals) / (interest_expense + principal_repayment)`;
+                modalParameters.innerHTML = `"{'principal_repayment': '172000', 'owner_advances_withdrawals': '15000', 'distribution': '30000', 'dividends': '0', 'amortization': '5000', 'depreciation': '50000', 'taxes': '77070', 'interest_expense': '8000', 'net_income':'296250'}"`;
                 modalEditedValuesBeforeValidation.formulaExpression = modalFormulaExpression.innerHTML;
                 modalEditedValuesBeforeValidation.parameters = modalParameters.innerHTML;
 
@@ -1095,12 +1097,9 @@
                 modalEditedValuesBeforeValidation.formulaExpression = modalFormulaExpression.innerHTML;
                 modalEditedValuesBeforeValidation.parameters = modalParameters.innerHTML;
 
-                // Simulate a new validation result (e.g., a "FAIL" scenario) in the modal
-                testOutcomeValue.textContent = '1.15';
-                complianceResult.textContent = 'FAIL';
-                complianceResult.classList.remove('text-green-600');
-                complianceResult.classList.add('text-red-600');
-                justificationText.innerHTML = `The Debt Service Coverage Ratio of 1.15 was calculated using the same logic but resulted in a value below the minimum threshold of 1.2, indicating FAIL compliance. Further review of financial indicators is recommended.`;
+                // The Test Outcome and Compliance Result are to remain static as per the user's latest request.
+                // Therefore, no changes are made to testOutcomeValue and complianceResult here.
+                // The justification text remains as it was on modal open, reflecting the initial PASS scenario.
 
                 // Hide edit icons after validation
                 toggleModalFieldEditability(false);
@@ -1111,7 +1110,7 @@
             });
 
             previousBtn.addEventListener('click', () => {
-                // Reset main display values to pre-validation state
+                // Reset main display values to pre-validation state (initial static state)
                 testOutcomeValue.textContent = initialModalDisplayValues.testOutcome;
                 complianceResult.textContent = initialModalDisplayValues.complianceResult;
                 complianceResult.classList.remove('text-red-600');
@@ -1130,16 +1129,25 @@
 
 
             acceptBtnModal.addEventListener('click', () => {
-                // Get values from modal
-                const newTestOutcome = testOutcomeValue.textContent;
-                const newComplianceResult = complianceResult.textContent;
+                // Get values from modal (Test Outcome and Compliance Result are static)
+                const newTestOutcome = testOutcomeValue.textContent; // This will be the initial static value
+                const newComplianceResult = complianceResult.textContent; // This will be the initial static value
                 // Use the currently displayed (and potentially edited) calculation logic from modal
                 const newCalculationLogic = modalCalculationLogic.innerHTML;
+
+                // Get current date for "Last Evaluation Date"
+                const today = new Date();
+                const dd = String(today.getDate()).padStart(2, '0');
+                const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                const yyyy = today.getFullYear();
+                const currentDate = `${mm}/${dd}/${yyyy}`;
+
 
                 // Update main page fields
                 const financialIndicatorValueSpan = document.querySelector('[data-field-name="Financial Indicator Value"]');
                 const lastEvaluationStatusSpan = document.querySelector('[data-field-name="Last Evaluation Status"]');
-                const mainPageCalcLogicSpan = document.querySelector('[data-field-name="Calculation Logic"]'); // Main page calc logic
+                const mainPageCalcLogicSpan = document.querySelector('[data-field-name="Calculation Logic"]');
+                const mainPageLastEvaluationDateSpan = document.querySelector('[data-field-name="Last Evaluation Date"]');
 
                 if (financialIndicatorValueSpan) {
                     financialIndicatorValueSpan.textContent = newTestOutcome;
@@ -1158,6 +1166,10 @@
 
                 if (mainPageCalcLogicSpan) {
                     mainPageCalcLogicSpan.innerHTML = newCalculationLogic; // Update main page's calculation logic
+                }
+
+                if (mainPageLastEvaluationDateSpan) {
+                    mainPageLastEvaluationDateSpan.textContent = currentDate; // Update Last Evaluation Date
                 }
 
                 closeModal(); // Close the modal after updating
