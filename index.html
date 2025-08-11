@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BankingGPT</title>
+    <title>ADBS</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -97,27 +97,41 @@
             transform: translateY(0);
         }
     </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-purple': '#9C27F5', /* Custom purple color */
+                        'light-purple': '#EADDFF', /* A lighter shade for backgrounds/accents */
+                        'dark-purple': '#7B08E0', /* A darker shade for hover/active states */
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
 <body class="flex flex-col h-screen overflow-hidden">
 
     <!-- Top Navigation Bar -->
     <header class="bg-white shadow-sm z-10">
-        <!-- Top Lane: Cloud Icon, Centered Search Bar and Right Utility Icons -->
+        <!-- Top Lane: Accenture Logo, Accenture Dashboard Service, Centered Search Bar and Right Utility Icons -->
         <div class="py-2 px-4 flex items-center justify-between border-b border-gray-800 bg-black">
-            <!-- Cloud Icon at the start of the search lane -->
+            <!-- Accenture Logo at the start of the search lane -->
             <div class="flex items-center flex-shrink-0 mr-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M3 15a4 4 0 004 4h9a5 5 0 005-5V9a2 2 0 00-2-2h-1.5a.5.5 0 01-.5-.5V4.5a.5.5 0 00-.5-.5h-1a.5.5 0 00-.5.5V6a.5.5 0 01-.5.5H10a.5.5 0 01-.5-.5V4.5a.5.5 0 00-.5-.5h-1a.5.5 0 00-.5.5V7a.5.5 0 01-.5.5H5a2 2 0 00-2 2v6z" />
-                </svg>
+                <img src="https://logos-world.net/wp-content/uploads/2020/06/Accenture-Emblem-700x394.png"
+                    alt="Accenture Logo" class="h-10 w-10 object-contain">
+            </div>
+            <!-- Accenture Dashboard Service text -->
+            <div class="text-primary-purple font-bold text-xl flex items-center mr-6 flex-shrink-0">
+                Accenture Dashboard Service
             </div>
             <!-- This div pushes the search bar to the center by taking up available space -->
             <div class="flex-1 flex justify-center">
                 <div class="relative flex-shrink-0">
                     <input type="text" placeholder="Search..."
-                        class="pl-10 pr-4 py-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm w-64 bg-gray-800 text-white placeholder-gray-400">
+                        class="pl-10 pr-4 py-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-purple text-sm w-64 bg-gray-800 text-white placeholder-gray-400">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         class="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
@@ -173,20 +187,9 @@
             </div>
         </div>
 
-        <!-- Second Lane: nCino LOS Heading and Main Navigation Dropdowns -->
+        <!-- Second Lane: Main Navigation Dropdowns -->
         <nav
             class="py-2 px-4 flex items-center space-x-4 text-gray-700 font-medium text-sm overflow-x-auto whitespace-nowrap">
-            <!-- nCino LOS heading moved here -->
-            <div class="text-blue-600 font-bold text-lg flex items-center mr-6 flex-shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M3 10v11l6-3 6 3 6-3V10M3 10h18M3 10l-6 3m6-3l6 3m-6-3V3M3 10V3m18 7V3m-6 7V3M9 3v7m6-7v7">
-                    </path>
-                </svg>
-                nCino LOS
-            </div>
-
             <!-- Main Navigation Dropdowns -->
             <div class="relative group">
                 <button
@@ -361,7 +364,7 @@
             <div class="relative group">
                 <button
                     class="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 focus:outline-none dropdown-toggle">
-                    Covenant Rules
+                    Convenant Rules
                     <svg xmlns="http://www.w3.org/2000/svg"
                         class="h-4 w-4 ml-1 transform transition-transform group-hover:rotate-180" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
@@ -399,7 +402,7 @@
         <!-- Top Section: Title and Action Buttons -->
         <div class="flex items-center justify-between mb-6">
             <div>
-                <p class="text-sm text-gray-500">Covenant Management</p>
+                <p class="text-sm text-gray-500">Convenant Management</p>
                 <h1 class="text-2xl font-semibold text-gray-800">COV-000001</h1>
             </div>
             <div class="flex space-x-3">
@@ -407,18 +410,19 @@
                     class="px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors text-sm">Edit</button>
                 <button
                     class="px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors text-sm">Delete</button>
+                <button id="testConvenantBtn"
+                    class="px-4 py-2 bg-primary-purple text-white rounded-md hover:bg-dark-purple transition-colors text-sm">Test
+                    Convenant</button>
                 <button
-                    class="px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors text-sm">Test
-                    Covenant (UP)</button>
-                <button id="validateCovenantBtn"
-                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm">Validate
-                    Covenant</button>
+                    class="px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors text-sm">Download</button>
+                <button
+                    class="px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors text-sm">Query</button>
             </div>
         </div>
 
         <!-- Two Column Layout for Details/Relationships -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Left Column: Details and Covenant Compliance Fields -->
+            <!-- Left Column: Details and Convenant Compliance Fields -->
             <div class="lg:col-span-2 space-y-6">
                 <!-- Details Card -->
                 <div class="bg-white rounded-lg shadow-md p-6">
@@ -430,7 +434,7 @@
                             <div class="editable-field-container flex items-center space-x-1">
                                 <span class="display-value text-gray-800 font-medium" data-field-name="Account">Flowers
                                     For Dreams</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors">
+                                <button class="edit-button text-gray-400 hover:text-primary-purple transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -445,7 +449,7 @@
                             <div class="editable-field-container flex items-center space-x-1">
                                 <span class="display-value text-gray-800 font-medium"
                                     data-field-name="Frequency Template">Quarterly (Every 3 Months)</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors">
+                                <button class="edit-button text-gray-400 hover:text-primary-purple transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -460,7 +464,7 @@
                             <div class="editable-field-container flex items-center space-x-1">
                                 <span class="display-value text-gray-800 font-medium"
                                     data-field-name="Effective Date">8/31/2025</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors">
+                                <button class="edit-button text-gray-400 hover:text-primary-purple transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -471,11 +475,11 @@
                             </div>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Covenant Type</span>
+                            <span class="text-gray-600">Convenant Type</span>
                             <div class="editable-field-container flex items-center space-x-1">
                                 <span class="display-value text-gray-800 font-medium"
-                                    data-field-name="Covenant Type">Debt Service Coverage of Borrower</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors">
+                                    data-field-name="Convenant Type">Debt Service Coverage of Borrower</span>
+                                <button class="edit-button text-gray-400 hover:text-primary-purple transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -490,7 +494,7 @@
                             <div class="editable-field-container flex items-center space-x-1">
                                 <span class="display-value text-gray-800 font-medium"
                                     data-field-name="Due Date">9/30/2025</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors">
+                                <button class="edit-button text-gray-400 hover:text-primary-purple transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -505,7 +509,7 @@
                             <div class="editable-field-container flex items-center space-x-1">
                                 <span class="display-value text-gray-800 font-medium"
                                     data-field-name="Account/Document"></span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors">
+                                <button class="edit-button text-gray-400 hover:text-primary-purple transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -520,7 +524,7 @@
                             <div class="editable-field-container flex items-center space-x-1">
                                 <span class="display-value text-gray-800 font-medium"
                                     data-field-name="Grace Days">30</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors">
+                                <button class="edit-button text-gray-400 hover:text-primary-purple transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -531,11 +535,11 @@
                             </div>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Covenant Status</span>
+                            <span class="text-gray-600">Convenant Status</span>
                             <div class="editable-field-container flex items-center space-x-1">
                                 <span class="display-value text-gray-800 font-medium text-green-600"
-                                    data-field-name="Covenant Status">10% headroom</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors">
+                                    data-field-name="Convenant Status">10% headroom</span>
+                                <button class="edit-button text-gray-400 hover:text-primary-purple transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -546,11 +550,11 @@
                             </div>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Covenant Type Text</span>
+                            <span class="text-gray-600">Convenant Type Text</span>
                             <div class="editable-field-container flex items-center space-x-1">
                                 <span class="display-value text-gray-800 font-medium"
-                                    data-field-name="Covenant Type Text">Debt Service Coverage of Borrower</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors">
+                                    data-field-name="Convenant Type Text">Debt Service Coverage of Borrower</span>
+                                <button class="edit-button text-gray-400 hover:text-primary-purple transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -563,16 +567,16 @@
                     </div>
                 </div>
 
-                <!-- Covenant Compliance Fields Card -->
+                <!-- Convenant Compliance Fields Card -->
                 <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Covenant Compliance Fields</h2>
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Convenant Compliance Fields</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-sm">
                         <div class="flex justify-between items-center">
                             <span class="text-gray-600">Financial Indicator Operator</span>
                             <div class="editable-field-container flex items-center space-x-1">
                                 <span class="display-value text-gray-800 font-medium"
                                     data-field-name="Financial Indicator Operator">Greater Than or Equal To</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors">
+                                <button class="edit-button text-gray-400 hover:text-primary-purple transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -587,7 +591,7 @@
                             <div class="editable-field-container flex items-center space-x-1">
                                 <span class="display-value text-gray-800 font-medium text-red-600"
                                     data-field-name="Last Evaluation Status">Exception</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors">
+                                <button class="edit-button text-gray-400 hover:text-primary-purple transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -602,7 +606,7 @@
                             <div class="editable-field-container flex items-center space-x-1">
                                 <span class="display-value text-gray-800 font-medium"
                                     data-field-name="Financial Indicator Value">1.200</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors">
+                                <button class="edit-button text-gray-400 hover:text-primary-purple transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -617,7 +621,7 @@
                             <div class="editable-field-container flex items-center space-x-1">
                                 <span class="display-value text-gray-800 font-medium"
                                     data-field-name="Last Evaluation Date">7/11/2025</span>
-                                <button class="edit-button text-gray-400 hover:text-blue-600 transition-colors">
+                                <button class="edit-button text-gray-400 hover:text-primary-purple transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -635,15 +639,13 @@
                                     data-field-name="Calculation Logic">
                                     Definition of **EBITDA** (How to Calculate) = Net Income + Interest Expense + Taxes
                                     + Depreciation + Amortization - Dividends - Distribution - Owner
-                                    Advances/Withdrawals
-                                    <br><br>
+                                    Advances/Withdrawals<br>
                                     Definition of **Debt Service** (How to Calculate) = Interest Expense + Principal
-                                    Repayment
-                                    <br><br>
+                                    Repayment<br>
                                     Definition of **DSC** (How to Calculated) = EBITDA/Debt Service
                                 </span>
                                 <button
-                                    class="edit-button text-gray-400 hover:text-blue-600 transition-colors absolute top-1 right-1">
+                                    class="edit-button text-gray-400 hover:text-primary-purple transition-colors absolute top-1 right-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -698,18 +700,18 @@
                         </li>
                     </ul>
                     <button
-                        class="mt-4 w-full text-blue-600 text-center py-2 hover:bg-blue-50 rounded-md transition-colors text-sm">View
+                        class="mt-4 w-full text-primary-purple text-center py-2 hover:bg-light-purple rounded-md transition-colors text-sm">View
                         All</button>
                 </div>
 
-                <!-- Covenant Compliance Indicator Value Chart Card -->
+                <!-- Convenant Compliance Indicator Value Chart Card -->
                 <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Covenant Compliance Indicator Value Chart</h2>
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Convenant Compliance Indicator Value Chart</h2>
                     <div
-                        class="w-full h-64 bg-gray-100 rounded-md flex items-center justify-center text-gray-400 text-sm">
+                        class="w-full h-64 bg-light-purple rounded-md flex items-center justify-center text-dark-purple text-sm">
                         <!-- Placeholder for chart -->
-                        <img src="https://placehold.co/400x256/E0E7FF/6366F1?text=Chart+Placeholder"
-                            alt="Chart Placeholder" class="w-full h-full object-cover rounded-md">
+                        <img src="https://placehold.co/400x256/EADDFF/7B08E0?text=Convenant+Chart"
+                            alt="Convenant Chart Placeholder" class="w-full h-full object-cover rounded-md">
                     </div>
                     <div class="mt-4 text-center text-xs text-gray-500">
                         Evaluation Date
@@ -723,7 +725,7 @@
     <footer
         class="bg-white shadow-t py-2 px-4 flex items-center justify-end space-x-4 text-sm text-gray-600 border-t border-gray-200">
         <button class="flex items-center space-x-1 p-2 rounded-md hover:bg-gray-100 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24"
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-purple" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
@@ -742,11 +744,11 @@
         </button>
     </footer>
 
-    <!-- Validate Covenant Modal -->
-    <div id="validateCovenantModal" class="modal-overlay">
+    <!-- Test Convenant Modal -->
+    <div id="testConvenantModal" class="modal-overlay">
         <div class="modal-content">
             <div class="flex justify-between items-center pb-4 border-b border-gray-200 mb-4">
-                <h3 class="text-xl font-semibold text-gray-800">Test Covenant (LP)</h3>
+                <h3 class="text-xl font-semibold text-gray-800">Test Convenant (LP)</h3>
                 <button class="text-gray-400 hover:text-gray-600" onclick="closeModal()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -760,18 +762,18 @@
                     <span class="font-medium text-gray-700">Agent Name:</span> Trust Formula Extraction and Calculations
                 </p>
                 <p>
-                    <span class="font-medium text-gray-700">Covenant Threshold:</span> 1.2
+                    <span class="font-medium text-gray-700">Convenant Threshold:</span> 1.2
                 </p>
                 <p>
-                    <span class="font-medium text-gray-700">Test Outcome:</span> 1.61
+                    <span class="font-medium text-gray-700">Test Outcome:</span> <span id="testOutcomeValue">1.61</span>
                 </p>
                 <p>
-                    <span class="font-medium text-gray-700">Compliance Result:</span> <span
+                    <span class="font-medium text-gray-700">Compliance Result:</span> <span id="complianceResult"
                         class="text-green-600 font-semibold">PASS</span>
                 </p>
                 <div>
                     <p class="font-medium text-gray-700 mb-1">Justification:</p>
-                    <p class="text-gray-800 bg-gray-50 p-3 rounded-md leading-relaxed">
+                    <p id="justificationText" class="text-gray-800 bg-gray-50 p-3 rounded-md leading-relaxed">
                         The Debt Service Coverage Ratio of 1.61 was calculated by first determining EBITDA (325000) by
                         adding net income (296250), interest expense (8000), taxes (77070), depreciation (50000), and
                         amortization (5000), then subtracting dividends (0), distributions (30000), and owner
@@ -780,27 +782,88 @@
                         minimum threshold of 1.2, indicating PASS compliance.
                     </p>
                 </div>
+                <!-- Editable Calculation Logic field in the modal -->
+                <div class="col-span-1 md:col-span-2 flex flex-col">
+                    <span class="font-medium text-gray-700 mb-1">Calculation Logic:</span>
+                    <div class="editable-field-container relative bg-gray-50 p-3 rounded-md text-xs leading-relaxed">
+                        <span class="display-value text-gray-800 font-medium pr-6"
+                            data-field-name="Calculation Logic Modal">
+                            Definition of **EBITDA** (How to Calculate) = Net Income + Interest Expense + Taxes +
+                            Depreciation + Amortization - Dividends - Distribution - Owner Advances/Withdrawals<br>
+                            Definition of **Debt Service** (How to Calculate) = Interest Expense + Principal
+                            Repayment<br>
+                            Definition of **DSC** (How to Calculated) = EBITDA/Debt Service
+                        </span>
+                        <button
+                            class="edit-button text-gray-400 hover:text-primary-purple transition-colors absolute top-1 right-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
                 <div>
                     <p class="font-medium text-gray-700 mb-1">Formula Expression:</p>
-                    <p class="text-gray-800 bg-gray-50 p-3 rounded-md text-xs leading-relaxed font-mono">
-                        (net_income + interest_expense + taxes + depreciation + amortization - dividends - distribution
-                        - owner_advances_withdrawals) / (interest_expense + principal_repayment)
-                    </p>
+                    <div class="editable-field-container relative bg-gray-50 p-3 rounded-md text-xs leading-relaxed">
+                        <span id="formulaExpression" class="display-value text-gray-800 font-medium pr-6"
+                            data-field-name="Formula Expression">
+                            (net_income + interest_expense + taxes + depreciation + amortization - dividends -
+                            distribution - owner_advances_withdrawals) / (interest_expense + principal_repayment)
+                        </span>
+                        <button
+                            class="edit-button text-gray-400 hover:text-primary-purple transition-colors absolute top-1 right-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
                 <div>
                     <p class="font-medium text-gray-700 mb-1">Parameters:</p>
-                    <p class="text-gray-800 bg-gray-50 p-3 rounded-md text-xs leading-relaxed font-mono">
-                        "{'principal_repayment': '172000', 'owner_advances_withdrawals': '15000', 'distribution':
-                        '30000', 'dividends': '0', 'amortization': '5000', 'depreciation': '50000', 'taxes': '77070',
-                        'interest_expense': '8000', 'net_income':'296250'}"
-                    </p>
+                    <div class="editable-field-container relative bg-gray-50 p-3 rounded-md text-xs leading-relaxed">
+                        <span id="parametersText" class="display-value text-gray-800 font-medium pr-6"
+                            data-field-name="Parameters">
+                            "{'principal_repayment': '172000', 'owner_advances_withdrawals': '15000', 'distribution':
+                            '30000', 'dividends': '0', 'amortization': '5000', 'depreciation': '50000', 'taxes':
+                            '77070', 'interest_expense': '8000', 'net_income':'296250'}"
+                        </span>
+                        <button
+                            class="edit-button text-gray-400 hover:text-primary-purple transition-colors absolute top-1 right-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="flex justify-end space-x-3 mt-6 pt-4 border-t border-gray-200">
+            <div id="modalButtonsInitial" class="flex justify-end space-x-3 mt-6 pt-4 border-t border-gray-200">
                 <button
-                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors text-sm">Previous</button>
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors text-sm"
+                    onclick="closeModal()">Cancel</button>
+                <button id="initialValidateBtn"
+                    class="px-4 py-2 bg-primary-purple text-white rounded-md hover:bg-dark-purple transition-colors text-sm">Validate</button>
+            </div>
+            <div id="modalButtonsPostValidate"
+                class="flex justify-end space-x-3 mt-6 pt-4 border-t border-gray-200 hidden">
                 <button
-                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm">Next</button>
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors text-sm"
+                    onclick="closeModal()">Cancel</button>
+                <button
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors text-sm"
+                    id="previousBtn">Previous</button>
+                <button id="acceptBtnModal"
+                    class="px-4 py-2 bg-primary-purple text-white rounded-md hover:bg-dark-purple transition-colors text-sm">Accept</button>
+                <button id="rejectBtn"
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors text-sm">Reject</button>
             </div>
         </div>
     </div>
@@ -834,29 +897,31 @@
                 });
             });
 
-            // Add event listeners for all edit buttons
+            // Add event listeners for all edit buttons (both on main page and in modal)
             document.querySelectorAll('.edit-button').forEach(button => {
                 button.addEventListener('click', (event) => {
                     const container = event.currentTarget.closest('.editable-field-container');
                     if (!container) return;
 
+                    // Determine the field name from the data-field-name attribute of the display-value span
                     const displayValueSpan = container.querySelector('.display-value');
-                    const originalValue = displayValueSpan.innerHTML;
                     const fieldName = displayValueSpan.dataset.fieldName;
+                    const originalValue = displayValueSpan.innerHTML;
+
 
                     // Determine if it's a short text (input) or long text (textarea)
-                    const isLongText = (fieldName === 'Calculation Logic'); // Only Calculation Logic is long text now
+                    const isLongText = (fieldName === 'Calculation Logic' || fieldName === 'Calculation Logic Modal' || fieldName === 'Formula Expression' || fieldName === 'Parameters');
 
                     // Create the input/textarea element
                     let inputElement;
                     if (isLongText) {
                         inputElement = document.createElement('textarea');
-                        inputElement.classList.add('w-full', 'p-2', 'border', 'border-blue-400', 'rounded-md', 'shadow-sm', 'focus:outline-none', 'focus:ring-2', 'focus:ring-blue-500', 'text-sm', 'h-24');
+                        inputElement.classList.add('w-full', 'p-2', 'border', 'border-primary-purple', 'rounded-md', 'shadow-sm', 'focus:outline-none', 'focus:ring-2', 'focus:ring-primary-purple', 'text-sm', 'h-24');
                         inputElement.style.minHeight = '60px'; // Ensure it doesn't collapse too much
                     } else {
                         inputElement = document.createElement('input');
                         inputElement.type = 'text';
-                        inputElement.classList.add('w-full', 'p-1', 'border', 'border-blue-400', 'rounded-md', 'shadow-sm', 'focus:outline-none', 'focus:ring-2', 'focus:ring-blue-500', 'text-sm');
+                        inputElement.classList.add('w-full', 'p-1', 'border', 'border-primary-purple', 'rounded-md', 'shadow-sm', 'focus:outline-none', 'focus:ring-2', 'focus:ring-primary-purple', 'text-sm');
                     }
                     // Remove strong tags and <br> for editing, but keep the text content
                     inputElement.value = originalValue.replace(/<\/?strong>/g, '').replace(/<br\s*\/?>/g, '\n').trim();
@@ -880,13 +945,18 @@
 
                         let newValue = inputElement.value;
 
-                        // Re-add bolding and <br> for specific keywords in the combined Calculation Logic field
-                        if (fieldName === 'Calculation Logic') {
-                            // Split by newlines, re-add bolding, then join with <br><br>
-                            const lines = newValue.split('\n').map(line => {
-                                return line.replace(/Definition of (EBITDA|Debt Service|DSC)/g, 'Definition of **$1**');
-                            });
-                            newValue = lines.join('<br><br>');
+                        // Re-add bolding and <br> for specific keywords in the Calculation Logic fields
+                        if (fieldName === 'Calculation Logic' || fieldName === 'Calculation Logic Modal') {
+                            // First, replace two or more newlines with a unique placeholder for paragraph breaks
+                            let htmlContent = newValue.replace(/\n{2,}/g, '@@PARAGRAPH_BREAK@@');
+                            // Then, replace single newlines with a single <br>
+                            htmlContent = htmlContent.replace(/\n/g, '<br>');
+                            // Finally, replace the placeholder with <br><br>
+                            htmlContent = htmlContent.replace(/@@PARAGRAPH_BREAK@@/g, '<br><br>');
+
+                            // Re-add bolding for specific keywords
+                            htmlContent = htmlContent.replace(/Definition of (EBITDA|Debt Service|DSC)/g, 'Definition of **$1**');
+                            newValue = htmlContent;
                         }
 
                         displayValueSpan.innerHTML = newValue; // Update the display span
@@ -913,22 +983,202 @@
                 });
             });
 
-            // Modal functionality
-            const validateCovenantBtn = document.getElementById('validateCovenantBtn');
-            const validateCovenantModal = document.getElementById('validateCovenantModal');
+            // Modal elements
+            const testConvenantBtn = document.getElementById('testConvenantBtn');
+            const testConvenantModal = document.getElementById('testConvenantModal');
+            const modalButtonsInitial = document.getElementById('modalButtonsInitial');
+            const initialValidateBtn = document.getElementById('initialValidateBtn');
+            const modalButtonsPostValidate = document.getElementById('modalButtonsPostValidate');
+            const previousBtn = document.getElementById('previousBtn');
+            const acceptBtnModal = document.getElementById('acceptBtnModal');
+            const rejectBtn = document.getElementById('rejectBtn');
 
-            validateCovenantBtn.addEventListener('click', () => {
-                validateCovenantModal.classList.add('active');
+            const testOutcomeValue = document.getElementById('testOutcomeValue');
+            const complianceResult = document.getElementById('complianceResult');
+            const justificationText = document.getElementById('justificationText');
+            const mainPageCalculationLogic = document.querySelector('[data-field-name="Calculation Logic"]');
+            const modalCalculationLogic = document.querySelector('[data-field-name="Calculation Logic Modal"]');
+            const modalFormulaExpression = document.querySelector('[data-field-name="Formula Expression"]');
+            const modalParameters = document.querySelector('[data-field-name="Parameters"]');
+
+            // Store initial display values (test outcome, compliance, justification)
+            const initialModalDisplayValues = {
+                testOutcome: '1.61',
+                complianceResult: 'PASS',
+                justification: `The Debt Service Coverage Ratio of 1.61 was calculated by first determining EBITDA (325000) by adding net income (296250), interest expense (8000), taxes (77070), depreciation (50000), and amortization (5000), then subtracting dividends (0), distributions (30000), and owner advances/withdrawals (15000). This was then divided by the total debt service of 180000 (interest expense 8000 + principal repayment 172000). The resulting ratio of 1.61 exceeds the minimum threshold of 1.2, indicating PASS compliance.`
+            };
+
+            // This will hold the user's *last edited* content for the editable fields before validation.
+            let modalEditedValuesBeforeValidation = {
+                calculationLogic: '',
+                formulaExpression: '',
+                parameters: ''
+            };
+
+            // Helper to toggle editability and ensure display state for specific modal fields
+            function toggleModalFieldEditability(enable) {
+                const fields = [modalCalculationLogic, modalFormulaExpression, modalParameters];
+                fields.forEach(field => {
+                    if (field) {
+                        const container = field.closest('.editable-field-container');
+                        if (container) {
+                            const editButton = container.querySelector('.edit-button');
+                            let activeInput = container.querySelector('input, textarea'); // Check if an input is active
+
+                            if (enable) {
+                                // If enabling, ensure any active input is removed and display span is visible
+                                if (activeInput) {
+                                    activeInput.remove();
+                                    field.style.display = ''; // Show display span
+                                }
+                                if (editButton) {
+                                    editButton.style.display = ''; // Show edit button
+                                }
+                            } else { // Disable editability
+                                // If an input is currently active, trigger blur to finalize input and revert to display state
+                                if (activeInput) {
+                                    const blurEvent = new Event('blur');
+                                    activeInput.dispatchEvent(blurEvent);
+                                }
+                                if (editButton) {
+                                    editButton.style.display = 'none'; // Hide edit button
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Function to reset all modal content to its initial state (as when opened from main page)
+            function resetModalToInitialOpenState() {
+                testOutcomeValue.textContent = initialModalDisplayValues.testOutcome;
+                complianceResult.textContent = initialModalDisplayValues.complianceResult;
+                complianceResult.classList.remove('text-red-600');
+                complianceResult.classList.add('text-green-600');
+                justificationText.innerHTML = initialModalDisplayValues.justification;
+
+                // Set modal editable fields to main page's current calculation logic
+                if (mainPageCalculationLogic) {
+                    modalCalculationLogic.innerHTML = mainPageCalculationLogic.innerHTML;
+                    modalEditedValuesBeforeValidation.calculationLogic = mainPageCalculationLogic.innerHTML; // Also update the 'text-b' store
+                }
+                // For formula and parameters, they have static initial values in the HTML
+                modalFormulaExpression.innerHTML = `(net_income + interest_expense + taxes + depreciation + amortization - dividends - distribution - owner_advances_withdrawals) / (interest_expense + principal_repayment)`; // Explicitly set to single line if not multi-line
+                modalParameters.innerHTML = `"{'principal_repayment': '172000', 'owner_advances_withdrawals': '15000', 'distribution': '30000', 'dividends': '0', 'amortization': '5000', 'depreciation': '50000', 'taxes': '77070', 'interest_expense': '8000', 'net_income':'296250'}"`; // Explicitly set to single line if not multi-line
+                modalEditedValuesBeforeValidation.formulaExpression = modalFormulaExpression.innerHTML;
+                modalEditedValuesBeforeValidation.parameters = modalParameters.innerHTML;
+
+                toggleModalFieldEditability(true); // Ensure fields are editable
+            }
+
+
+            testConvenantBtn.addEventListener('click', () => {
+                testConvenantModal.classList.add('active');
+                resetModalToInitialOpenState(); // Reset content and make fields editable
+                modalButtonsInitial.classList.remove('hidden');
+                modalButtonsPostValidate.classList.add('hidden');
+            });
+
+            initialValidateBtn.addEventListener('click', () => {
+                // Force save any active input/textarea for editable fields before validation
+                const editableFieldsInModal = [modalCalculationLogic, modalFormulaExpression, modalParameters];
+                editableFieldsInModal.forEach(field => {
+                    const inputElement = field.closest('.editable-field-container').querySelector('textarea, input');
+                    if (inputElement && inputElement.parentNode) {
+                        const blurEvent = new Event('blur');
+                        inputElement.dispatchEvent(blurEvent);
+                    }
+                });
+
+                // Capture current edited values (text-b) BEFORE updating display for validation result
+                modalEditedValuesBeforeValidation.calculationLogic = modalCalculationLogic.innerHTML;
+                modalEditedValuesBeforeValidation.formulaExpression = modalFormulaExpression.innerHTML;
+                modalEditedValuesBeforeValidation.parameters = modalParameters.innerHTML;
+
+                // Simulate a new validation result (e.g., a "FAIL" scenario) in the modal
+                testOutcomeValue.textContent = '1.15';
+                complianceResult.textContent = 'FAIL';
+                complianceResult.classList.remove('text-green-600');
+                complianceResult.classList.add('text-red-600');
+                justificationText.innerHTML = `The Debt Service Coverage Ratio of 1.15 was calculated using the same logic but resulted in a value below the minimum threshold of 1.2, indicating FAIL compliance. Further review of financial indicators is recommended.`;
+
+                // Hide edit icons after validation
+                toggleModalFieldEditability(false);
+
+                // Hide initial buttons, show post-validate buttons
+                modalButtonsInitial.classList.add('hidden');
+                modalButtonsPostValidate.classList.remove('hidden');
+            });
+
+            previousBtn.addEventListener('click', () => {
+                // Reset main display values to pre-validation state
+                testOutcomeValue.textContent = initialModalDisplayValues.testOutcome;
+                complianceResult.textContent = initialModalDisplayValues.complianceResult;
+                complianceResult.classList.remove('text-red-600');
+                complianceResult.classList.add('text-green-600');
+                justificationText.innerHTML = initialModalDisplayValues.justification;
+
+                // Restore editable fields to their state just before validation (text-b)
+                modalCalculationLogic.innerHTML = modalEditedValuesBeforeValidation.calculationLogic;
+                modalFormulaExpression.innerHTML = modalEditedValuesBeforeValidation.formulaExpression;
+                modalParameters.innerHTML = modalEditedValuesBeforeValidation.parameters;
+
+                toggleModalFieldEditability(true); // Make fields editable again
+                modalButtonsInitial.classList.remove('hidden');
+                modalButtonsPostValidate.classList.add('hidden');
+            });
+
+
+            acceptBtnModal.addEventListener('click', () => {
+                // Get values from modal
+                const newTestOutcome = testOutcomeValue.textContent;
+                const newComplianceResult = complianceResult.textContent;
+                // Use the currently displayed (and potentially edited) calculation logic from modal
+                const newCalculationLogic = modalCalculationLogic.innerHTML;
+
+                // Update main page fields
+                const financialIndicatorValueSpan = document.querySelector('[data-field-name="Financial Indicator Value"]');
+                const lastEvaluationStatusSpan = document.querySelector('[data-field-name="Last Evaluation Status"]');
+                const mainPageCalcLogicSpan = document.querySelector('[data-field-name="Calculation Logic"]'); // Main page calc logic
+
+                if (financialIndicatorValueSpan) {
+                    financialIndicatorValueSpan.textContent = newTestOutcome;
+                }
+
+                if (lastEvaluationStatusSpan) {
+                    lastEvaluationStatusSpan.textContent = newComplianceResult;
+                    if (newComplianceResult.toUpperCase() === 'PASS') {
+                        lastEvaluationStatusSpan.classList.remove('text-red-600');
+                        lastEvaluationStatusSpan.classList.add('text-green-600');
+                    } else if (newComplianceResult.toUpperCase() === 'FAIL' || newComplianceResult.toUpperCase() === 'EXCEPTION') {
+                        lastEvaluationStatusSpan.classList.remove('text-green-600');
+                        lastEvaluationStatusSpan.classList.add('text-red-600');
+                    }
+                }
+
+                if (mainPageCalcLogicSpan) {
+                    mainPageCalcLogicSpan.innerHTML = newCalculationLogic; // Update main page's calculation logic
+                }
+
+                closeModal(); // Close the modal after updating
+            });
+
+            rejectBtn.addEventListener('click', () => {
+                closeModal(); // Just close the modal, no updates
             });
 
             // Function to close the modal
             window.closeModal = function () {
-                validateCovenantModal.classList.remove('active');
+                testConvenantModal.classList.remove('active');
+                // Ensure the modal resets fully on any close action for a clean slate next time
+                resetModalToInitialOpenState();
+                modalButtonsInitial.classList.remove('hidden');
+                modalButtonsPostValidate.classList.add('hidden');
             };
 
             // Close modal when clicking outside of it
-            validateCovenantModal.addEventListener('click', (event) => {
-                if (event.target === validateCovenantModal) {
+            testConvenantModal.addEventListener('click', (event) => {
+                if (event.target === testConvenantModal) {
                     closeModal();
                 }
             });
