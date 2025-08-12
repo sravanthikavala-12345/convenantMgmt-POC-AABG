@@ -96,6 +96,16 @@
         .modal-overlay.active .modal-content {
             transform: translateY(0);
         }
+
+        /* Added class for non-editable content display */
+        .non-editable-content {
+            background-color: #f9fafb;
+            /* Lighter background for non-editable */
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            /* Light border */
+        }
     </style>
     <script>
         tailwind.config = {
@@ -635,7 +645,7 @@
                             <span class="text-gray-600 mb-1">Calculation Logic</span>
                             <div
                                 class="editable-field-container relative bg-gray-50 p-3 rounded-md text-xs leading-relaxed">
-                                <span class="display-value text-gray-800 font-medium pr-6"
+                                <span class="display-value text-gray-800 font-medium pr-20"
                                     data-field-name="Calculation Logic">
                                     Definition of **EBITDA** (How to Calculate) = Net Income + Interest Expense + Taxes
                                     + Depreciation + Amortization - Dividends - Distribution - Owner
@@ -759,21 +769,32 @@
             </div>
             <div class="space-y-4 text-sm">
                 <p>
-                    <span class="font-medium text-gray-700">Agent Name:</span> Trust Formula Extraction and Calculations
+                    <span class="font-medium text-gray-700">File Name:</span> COV-000001
                 </p>
-                <p>
-                    <span class="font-medium text-gray-700">Convenant Threshold:</span> 1.2
-                </p>
-                <p>
+                <!-- Convenant Threshold - Now non-editable -->
+                <div>
+                    <span class="font-medium text-gray-700">Convenant Threshold:</span>
+                    <span id="convenantThresholdText" class="text-gray-800 font-medium ml-1">1.2</span>
+                </div>
+                <!-- Covenant Type - Added to 1st slide, non-editable -->
+                <div>
+                    <span class="font-medium text-gray-700">Covenant Type:</span>
+                    <span id="convenantTypeModalText" class="text-gray-800 font-medium ml-1">Debt Service Coverage of
+                        Borrower</span>
+                </div>
+
+                <!-- Test Outcome, Compliance Result, Justification - hidden on first page -->
+                <p id="testOutcomeRow" class="hidden">
                     <span class="font-medium text-gray-700">Test Outcome:</span> <span id="testOutcomeValue">1.61</span>
                 </p>
-                <p>
+                <p id="complianceResultRow" class="hidden">
                     <span class="font-medium text-gray-700">Compliance Result:</span> <span id="complianceResult"
                         class="text-green-600 font-semibold">PASS</span>
                 </p>
-                <div>
+                <div id="justificationRow" class="hidden">
                     <p class="font-medium text-gray-700 mb-1">Justification:</p>
-                    <p id="justificationText" class="text-gray-800 bg-gray-50 p-3 rounded-md leading-relaxed">
+                    <p id="justificationText"
+                        class="text-gray-800 bg-gray-50 p-3 rounded-md leading-relaxed non-editable-content">
                         The Debt Service Coverage Ratio of 1.61 was calculated by first determining EBITDA (325000) by
                         adding net income (296250), interest expense (8000), taxes (77070), depreciation (50000), and
                         amortization (5000), then subtracting dividends (0), distributions (30000), and owner
@@ -782,12 +803,13 @@
                         minimum threshold of 1.2, indicating PASS compliance.
                     </p>
                 </div>
-                <!-- Editable Calculation Logic field in the modal -->
+
+                <!-- Calculation Logic - Editable -->
                 <div class="col-span-1 md:col-span-2 flex flex-col">
                     <span class="font-medium text-gray-700 mb-1">Calculation Logic:</span>
-                    <div class="editable-field-container relative bg-gray-50 p-3 rounded-md text-xs leading-relaxed">
-                        <span class="display-value text-gray-800 font-medium pr-6"
-                            data-field-name="Calculation Logic Modal">
+                    <div
+                        class="editable-field-container relative bg-gray-50 pt-5 pr-28 pb-3 pl-3 rounded-md text-xs leading-relaxed">
+                        <span class="display-value text-gray-800 font-medium" data-field-name="Calculation Logic Modal">
                             Definition of **EBITDA** (How to Calculate) = Net Income + Interest Expense + Taxes +
                             Depreciation + Amortization - Dividends - Distribution - Owner Advances/Withdrawals<br>
                             Definition of **Debt Service** (How to Calculate) = Interest Expense + Principal
@@ -805,43 +827,25 @@
                         </button>
                     </div>
                 </div>
-                <div>
+                <!-- Formula Expression - Non-editable on both pages -->
+                <div id="formulaExpressionRow"> <!-- Added ID for easier toggling -->
                     <p class="font-medium text-gray-700 mb-1">Formula Expression:</p>
-                    <div class="editable-field-container relative bg-gray-50 p-3 rounded-md text-xs leading-relaxed">
-                        <span id="formulaExpression" class="display-value text-gray-800 font-medium pr-6"
-                            data-field-name="Formula Expression">
+                    <div class="non-editable-content text-xs leading-relaxed">
+                        <span id="formulaExpression" class="text-gray-800 font-medium">
                             (net_income + interest_expense + taxes + depreciation + amortization - dividends -
                             distribution - owner_advances_withdrawals) / (interest_expense + principal_repayment)
                         </span>
-                        <button
-                            class="edit-button text-gray-400 hover:text-primary-purple transition-colors absolute top-1 right-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
-                                </path>
-                            </svg>
-                        </button>
                     </div>
                 </div>
+                <!-- Parameters - Non-editable -->
                 <div>
                     <p class="font-medium text-gray-700 mb-1">Parameters:</p>
-                    <div class="editable-field-container relative bg-gray-50 p-3 rounded-md text-xs leading-relaxed">
-                        <span id="parametersText" class="display-value text-gray-800 font-medium pr-6"
-                            data-field-name="Parameters">
+                    <div class="non-editable-content text-xs leading-relaxed">
+                        <span id="parametersText" class="text-gray-800 font-medium">
                             "{'principal_repayment': '172000', 'owner_advances_withdrawals': '15000', 'distribution':
                             '30000', 'dividends': '0', 'amortization': '5000', 'depreciation': '50000', 'taxes':
                             '77070', 'interest_expense': '8000', 'net_income':'296250'}"
                         </span>
-                        <button
-                            class="edit-button text-gray-400 hover:text-primary-purple transition-colors absolute top-1 right-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
-                                </path>
-                            </svg>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -854,9 +858,6 @@
             </div>
             <div id="modalButtonsPostValidate"
                 class="flex justify-end space-x-3 mt-6 pt-4 border-t border-gray-200 hidden">
-                <button
-                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors text-sm"
-                    onclick="closeModal()">Cancel</button>
                 <button
                     class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors text-sm"
                     id="previousBtn">Previous</button>
@@ -910,7 +911,8 @@
 
 
                     // Determine if it's a short text (input) or long text (textarea)
-                    const isLongText = (fieldName === 'Calculation Logic' || fieldName === 'Calculation Logic Modal' || fieldName === 'Formula Expression' || fieldName === 'Parameters');
+                    const isLongText = (fieldName === 'Calculation Logic' || fieldName === 'Calculation Logic Modal');
+                    const isNumberInput = (fieldName === 'Convenant Threshold Modal'); // This is no longer editable, but leaving the check for other number inputs if added later
 
                     // Create the input/textarea element
                     let inputElement;
@@ -918,11 +920,18 @@
                         inputElement = document.createElement('textarea');
                         inputElement.classList.add('w-full', 'p-2', 'border', 'border-primary-purple', 'rounded-md', 'shadow-sm', 'focus:outline-none', 'focus:ring-2', 'focus:ring-primary-purple', 'text-sm', 'h-24');
                         inputElement.style.minHeight = '60px'; // Ensure it doesn't collapse too much
-                    } else {
+                    } else if (isNumberInput) {
+                        inputElement = document.createElement('input');
+                        inputElement.type = 'number';
+                        inputElement.step = '0.01'; // For decimal numbers
+                        inputElement.classList.add('w-full', 'p-1', 'border', 'border-primary-purple', 'rounded-md', 'shadow-sm', 'focus:outline-none', 'focus:ring-2', 'focus:ring-primary-purple', 'text-sm');
+                    }
+                    else { // Default to text input for other short fields
                         inputElement = document.createElement('input');
                         inputElement.type = 'text';
                         inputElement.classList.add('w-full', 'p-1', 'border', 'border-primary-purple', 'rounded-md', 'shadow-sm', 'focus:outline-none', 'focus:ring-2', 'focus:ring-primary-purple', 'text-sm');
                     }
+
                     // Remove strong tags and <br> for editing, but keep the text content
                     inputElement.value = originalValue.replace(/<\/?strong>/g, '').replace(/<br\s*\/?>/g, '\n').trim();
 
@@ -952,7 +961,7 @@
                             // Then, replace single newlines with a single <br>
                             htmlContent = htmlContent.replace(/\n/g, '<br>');
                             // Finally, replace the placeholder with <br><br>
-                            htmlContent = htmlContent.replace(/@@PARAGRAPH_BREAK@@/g, '<br><br>');
+                            htmlContent = htmlContent.replace(/@@PARAGRAPH_BREAK@@/g, ' '); // Changed from <br><br> to a single space as per visual preference
 
                             // Re-add bolding for specific keywords
                             htmlContent = htmlContent.replace(/Definition of (EBITDA|Debt Service|DSC)/g, 'Definition of **$1**');
@@ -993,33 +1002,53 @@
             const acceptBtnModal = document.getElementById('acceptBtnModal');
             const rejectBtn = document.getElementById('rejectBtn');
 
+            // Elements for 2nd page display
+            const testOutcomeRow = document.getElementById('testOutcomeRow');
+            const complianceResultRow = document.getElementById('complianceResultRow');
+            const justificationRow = document.getElementById('justificationRow');
             const testOutcomeValue = document.getElementById('testOutcomeValue');
             const complianceResult = document.getElementById('complianceResult');
             const justificationText = document.getElementById('justificationText');
-            const mainPageCalculationLogic = document.querySelector('[data-field-name="Calculation Logic"]');
-            const mainPageLastEvaluationDate = document.querySelector('[data-field-name="Last Evaluation Date"]'); // Get the element for Last Evaluation Date
-            const modalCalculationLogic = document.querySelector('[data-field-name="Calculation Logic Modal"]');
-            const modalFormulaExpression = document.querySelector('[data-field-name="Formula Expression"]');
-            const modalParameters = document.querySelector('[data-field-name="Parameters"]');
+            const modalConvenantThresholdText = document.getElementById('convenantThresholdText'); // Element for non-editable Convenant Threshold in modal
+            const convenantTypeModalText = document.getElementById('convenantTypeModalText'); // Element for non-editable Convenant Type in modal
+            const formulaExpressionRow = document.getElementById('formulaExpressionRow'); // Formula Expression row
 
-            // Store initial display values (test outcome, compliance, justification)
+
+            // Elements controlled by data-field-name (editable fields)
+            const mainPageCalculationLogic = document.querySelector('[data-field-name="Calculation Logic"]');
+            const mainPageLastEvaluationDate = document.querySelector('[data-field-name="Last Evaluation Date"]');
+            const mainPageConvenantType = document.querySelector('[data-field-name="Convenant Type"]'); // Get Convenant Type from main page
+            const modalCalculationLogic = document.querySelector('[data-field-name="Calculation Logic Modal"]');
+
+            // Elements that are always static in the modal (non-editable in modal)
+            const modalFormulaExpression = document.getElementById('formulaExpression');
+            const modalParameters = document.getElementById('parametersText');
+
+
+            // Store initial display values (test outcome, compliance, justification, formula, parameters)
+            // These are the *default* values that show up in the 2nd slide after validation.
             const initialModalDisplayValues = {
                 testOutcome: '1.61',
                 complianceResult: 'PASS',
-                justification: `The Debt Service Coverage Ratio of 1.61 was calculated by first determining EBITDA (325000) by adding net income (296250), interest expense (8000), taxes (77070), depreciation (50000), and amortization (5000), then subtracting dividends (0), distributions (30000), and owner advances/withdrawals (15000). This was then divided by the total debt service of 180000 (interest expense 8000 + principal repayment 172000). The resulting ratio of 1.61 exceeds the minimum threshold of 1.2, indicating PASS compliance.`
+                justification: `The Debt Service Coverage Ratio of 1.61 was calculated by first determining EBITDA (325000) by adding net income (296250), interest expense (8000), taxes (77070), depreciation (50000), and amortization (5000), then subtracting dividends (0), distributions (30000), and owner advances/withdrawals (15000). This was then divided by the total debt service of 180000 (interest expense 8000 + principal repayment 172000). The resulting ratio of 1.61 exceeds the minimum threshold of 1.2, indicating PASS compliance.`,
+                formulaExpression: `(net_income + interest_expense + taxes + depreciation + amortization - dividends - distribution - owner_advances_withdrawals) / (interest_expense + principal_repayment)`,
+                parameters: `"{'principal_repayment': '172000', 'owner_advances_withdrawals': '15000', 'distribution': '30000', 'dividends': '0', 'amortization': '5000', 'depreciation': '50000', 'taxes': '77070', 'interest_expense': '8000', 'net_income':'296250'}"`
             };
 
             // This will hold the user's *last edited* content for the editable fields before validation.
             let modalEditedValuesBeforeValidation = {
                 calculationLogic: '',
-                formulaExpression: '',
-                parameters: ''
+                // convenantThreshold is no longer editable, so no need to store its edited value
             };
 
             // Helper to toggle editability and ensure display state for specific modal fields
             function toggleModalFieldEditability(enable) {
-                const fields = [modalCalculationLogic, modalFormulaExpression, modalParameters];
-                fields.forEach(field => {
+                // Only Calculation Logic is editable in the modal, so we control its edit button
+                const editableFields = [
+                    modalCalculationLogic
+                ];
+
+                editableFields.forEach(field => {
                     if (field) {
                         const container = field.closest('.editable-field-container');
                         if (container) {
@@ -1052,25 +1081,37 @@
 
             // Function to reset all modal content to its initial state (as when opened from main page)
             function resetModalToInitialOpenState() {
-                // Reset the static display values in the modal to their original state
-                testOutcomeValue.textContent = initialModalDisplayValues.testOutcome;
-                complianceResult.textContent = initialModalDisplayValues.complianceResult;
-                complianceResult.classList.remove('text-red-600');
-                complianceResult.classList.add('text-green-600');
-                justificationText.innerHTML = initialModalDisplayValues.justification;
+                // Hide outcome, compliance, justification, and formula expression rows initially for the 1st page
+                testOutcomeRow.classList.add('hidden');
+                complianceResultRow.classList.add('hidden');
+                justificationRow.classList.add('hidden');
+                formulaExpressionRow.classList.add('hidden'); // Hide Formula Expression on first slide
 
-                // Set modal editable fields to main page's current calculation logic
+                // Set initial values for the editable fields on the 1st page of the modal
                 if (mainPageCalculationLogic) {
                     modalCalculationLogic.innerHTML = mainPageCalculationLogic.innerHTML;
-                    modalEditedValuesBeforeValidation.calculationLogic = mainPageCalculationLogic.innerHTML; // Also update the 'text-b' store
+                    // Store this initial content as the starting 'text-b' for Calculation Logic
+                    modalEditedValuesBeforeValidation.calculationLogic = mainPageCalculationLogic.innerHTML;
                 }
-                // For formula and parameters, they have static initial values in the HTML
-                modalFormulaExpression.innerHTML = `(net_income + interest_expense + taxes + depreciation + amortization - dividends - distribution - owner_advances_withdrawals) / (interest_expense + principal_repayment)`;
-                modalParameters.innerHTML = `"{'principal_repayment': '172000', 'owner_advances_withdrawals': '15000', 'distribution': '30000', 'dividends': '0', 'amortization': '5000', 'depreciation': '50000', 'taxes': '77070', 'interest_expense': '8000', 'net_income':'296250'}"`;
-                modalEditedValuesBeforeValidation.formulaExpression = modalFormulaExpression.innerHTML;
-                modalEditedValuesBeforeValidation.parameters = modalParameters.innerHTML;
+                // Convenant Threshold is now non-editable, just set its static text
+                if (modalConvenantThresholdText) {
+                    modalConvenantThresholdText.textContent = "1.2"; // Always show 1.2
+                }
+                // Convenant Type text from main page
+                if (convenantTypeModalText && mainPageConvenantType) {
+                    convenantTypeModalText.textContent = mainPageConvenantType.textContent;
+                }
 
-                toggleModalFieldEditability(true); // Ensure fields are editable
+                // Ensure non-editable fields (Formula & Parameters) always display their fixed initial values
+                if (modalFormulaExpression) {
+                    modalFormulaExpression.innerHTML = initialModalDisplayValues.formulaExpression;
+                }
+                if (modalParameters) {
+                    modalParameters.innerHTML = initialModalDisplayValues.parameters;
+                }
+
+                // Ensure editable fields are active (edit icons visible)
+                toggleModalFieldEditability(true);
             }
 
 
@@ -1083,7 +1124,7 @@
 
             initialValidateBtn.addEventListener('click', () => {
                 // Force save any active input/textarea for editable fields before validation
-                const editableFieldsInModal = [modalCalculationLogic, modalFormulaExpression, modalParameters];
+                const editableFieldsInModal = [modalCalculationLogic]; // Only Calculation Logic is editable now
                 editableFieldsInModal.forEach(field => {
                     const inputElement = field.closest('.editable-field-container').querySelector('textarea, input');
                     if (inputElement && inputElement.parentNode) {
@@ -1094,14 +1135,22 @@
 
                 // Capture current edited values (text-b) BEFORE updating display for validation result
                 modalEditedValuesBeforeValidation.calculationLogic = modalCalculationLogic.innerHTML;
-                modalEditedValuesBeforeValidation.formulaExpression = modalFormulaExpression.innerHTML;
-                modalEditedValuesBeforeValidation.parameters = modalParameters.innerHTML;
 
-                // The Test Outcome and Compliance Result are to remain static as per the user's latest request.
-                // Therefore, no changes are made to testOutcomeValue and complianceResult here.
-                // The justification text remains as it was on modal open, reflecting the initial PASS scenario.
+                // Show Test Outcome, Compliance Result, Justification, and Formula Expression rows for the 2nd page
+                testOutcomeRow.classList.remove('hidden');
+                complianceResultRow.classList.remove('hidden');
+                justificationRow.classList.remove('hidden');
+                formulaExpressionRow.classList.remove('hidden'); // Show Formula Expression on second slide
 
-                // Hide edit icons after validation
+                // Set static Test Outcome, Compliance Result, Justification values (as per requirement)
+                testOutcomeValue.textContent = initialModalDisplayValues.testOutcome;
+                complianceResult.textContent = initialModalDisplayValues.complianceResult;
+                complianceResult.classList.remove('text-red-600'); // Ensure it's green for PASS
+                complianceResult.classList.add('text-green-600');
+                justificationText.innerHTML = initialModalDisplayValues.justification;
+
+
+                // Hide edit icons after validation (making fields non-editable)
                 toggleModalFieldEditability(false);
 
                 // Hide initial buttons, show post-validate buttons
@@ -1110,30 +1159,29 @@
             });
 
             previousBtn.addEventListener('click', () => {
-                // Reset main display values to pre-validation state (initial static state)
-                testOutcomeValue.textContent = initialModalDisplayValues.testOutcome;
-                complianceResult.textContent = initialModalDisplayValues.complianceResult;
-                complianceResult.classList.remove('text-red-600');
-                complianceResult.classList.add('text-green-600');
-                justificationText.innerHTML = initialModalDisplayValues.justification;
+                // Hide Test Outcome, Compliance Result, Justification, and Formula Expression rows for returning to 1st page
+                testOutcomeRow.classList.add('hidden');
+                complianceResultRow.classList.add('hidden');
+                justificationRow.classList.add('hidden');
+                formulaExpressionRow.classList.add('hidden'); // Hide Formula Expression on first slide
 
                 // Restore editable fields to their state just before validation (text-b)
                 modalCalculationLogic.innerHTML = modalEditedValuesBeforeValidation.calculationLogic;
-                modalFormulaExpression.innerHTML = modalEditedValuesBeforeValidation.formulaExpression;
-                modalParameters.innerHTML = modalEditedValuesBeforeValidation.parameters;
 
-                toggleModalFieldEditability(true); // Make fields editable again
+                // Make editable fields active again (edit icons visible)
+                toggleModalFieldEditability(true);
+
+                // Toggle buttons back to initial state
                 modalButtonsInitial.classList.remove('hidden');
                 modalButtonsPostValidate.classList.add('hidden');
             });
 
 
             acceptBtnModal.addEventListener('click', () => {
-                // Get values from modal (Test Outcome and Compliance Result are static)
-                const newTestOutcome = testOutcomeValue.textContent; // This will be the initial static value
-                const newComplianceResult = complianceResult.textContent; // This will be the initial static value
-                // Use the currently displayed (and potentially edited) calculation logic from modal
-                const newCalculationLogic = modalCalculationLogic.innerHTML;
+                // Get values from modal (Test Outcome and Compliance Result are static based on current implementation)
+                const newTestOutcome = testOutcomeValue.textContent;
+                const newComplianceResult = complianceResult.textContent;
+                const newCalculationLogic = modalCalculationLogic.innerHTML; // Get current (potentially edited) value
 
                 // Get current date for "Last Evaluation Date"
                 const today = new Date();
@@ -1183,6 +1231,7 @@
             window.closeModal = function () {
                 testConvenantModal.classList.remove('active');
                 // Ensure the modal resets fully on any close action for a clean slate next time
+                // This will also hide the outcome/compliance/justification rows.
                 resetModalToInitialOpenState();
                 modalButtonsInitial.classList.remove('hidden');
                 modalButtonsPostValidate.classList.add('hidden');
